@@ -6,6 +6,8 @@ COPY ./requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir -r /code/requirements.txt
 
+COPY ./train_model.py /code/train_model.py
+COPY ./client.py /code/client.py
 COPY ./app /code/app
 
 EXPOSE 8000

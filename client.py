@@ -1,32 +1,41 @@
-'''
-Script for inferencing the deployed model
-'''
+"""Example client to query the deployed shirt-size model."""
 
-import json
 import requests
 
-data = [[4.3, 3. , 1.1, 0.1],
-       [5.8, 4. , 1.2, 0.2],
-       [5.7, 4.4, 1.5, 0.4],
-       [5.4, 3.9, 1.3, 0.4],
-       [5.1, 3.5, 1.4, 0.3],
-       [5.7, 3.8, 1.7, 0.3],
-       [5.1, 3.8, 1.5, 0.3],
-       [5.4, 3.4, 1.7, 0.2],
-       [5.1, 3.7, 1.5, 0.4],
-       [4.6, 3.6, 1. , 0.2],
-       [5.1, 3.3, 1.7, 0.5],
-       [4.8, 3.4, 1.9, 0.2]]
 
-url = 'http://0.0.0.0:8000/predict/'
+url = "http://0.0.0.0:8000/predict"
 
-predictions = []
-for record in data:
-    payload = {'features': record}
-    payload = json.dumps(payload)
-    response = requests.post(url, data=payload)
-    predictions.append(response.json()['predicted_class'])
+examples = [
+    {
+        "height_cm": 165,
+        "weight_kg": 58,
+        "age": 22,
+        "gender": "female",
+        "fit_preference": "regular",
+        "build": "lean",
+    },
+    {
+        "height_cm": 178,
+        "weight_kg": 82,
+        "age": 28,
+        "gender": "male",
+        "fit_preference": "regular",
+        "build": "athletic",
+    },
+    {
+        "height_cm": 172,
+        "weight_kg": 95,
+        "age": 35,
+        "gender": "male",
+        "fit_preference": "oversized",
+        "build": "average",
+    },
+]
 
-print(predictions)
+
+for payload in examples:
+    r = requests.post(url, json=payload, timeout=10)
+    r.raise_for_status()
+    print(payload, "=>", r.json())
 
 
