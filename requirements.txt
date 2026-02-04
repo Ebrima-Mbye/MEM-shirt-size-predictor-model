@@ -1,7 +1,10 @@
 scikit-learn==1.3.1
 numpy
-streamlit
 joblib
+fastapi
+uvicorn[standard]
+pydantic
+streamlit
 fastapi
 uvicorn
 pydantic
