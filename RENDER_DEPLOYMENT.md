@@ -39,16 +39,19 @@ You'll get a URL like: `https://mem-shirt-size-predictor-api.onrender.com`
 In your **my-exam-mate** project, add this environment variable:
 
 **For Vercel/Production:**
+
 ```bash
 MEM_PREDICTOR_BASE_URL=https://mem-shirt-size-predictor-api.onrender.com
 ```
 
 **For Local Development:**
+
 ```bash
 MEM_PREDICTOR_BASE_URL=http://localhost:8000
 ```
 
 Add to `.env.local`:
+
 ```env
 MEM_PREDICTOR_BASE_URL=https://mem-shirt-size-predictor-api.onrender.com
 ```
@@ -71,6 +74,7 @@ curl -X POST https://mem-shirt-size-predictor-api.onrender.com/predict \
 ```
 
 Expected response:
+
 ```json
 {
   "recommended_size": "L",
@@ -89,6 +93,7 @@ Expected response:
 ## API Endpoints
 
 Your FastAPI server provides:
+
 - `GET /` - Welcome message
 - `GET /health` - Health check
 - `GET /model-info` - Model metadata
@@ -101,19 +106,24 @@ Visit `https://your-api-url.onrender.com/docs` for interactive testing!
 ## Important Notes
 
 ### Free Tier Limitations
+
 - **Cold starts**: Free instances sleep after 15 minutes of inactivity
 - **First request** after sleep takes ~30-60 seconds to wake up
 - **Solution**: Use a cron job or uptime monitor to ping every 10 minutes
 
 ### Keep It Awake (Optional)
+
 Use a service like:
+
 - **UptimeRobot** (free): https://uptimerobot.com/
 - **Cron-job.org** (free): https://cron-job.org/
 
 Set it to ping: `https://your-api-url.onrender.com/health` every 10 minutes
 
 ### Upgrade Options
+
 If you need:
+
 - No cold starts
 - More RAM/CPU
 - Custom domain
@@ -123,14 +133,17 @@ Consider upgrading to Render's **Starter plan** ($7/month)
 ## Troubleshooting
 
 ### Build Fails
+
 - Check that `app/model.joblib` is in your repository
 - Verify `requirements.txt` has correct dependencies
 
 ### 502 Bad Gateway
+
 - Service might be starting (wait 1-2 minutes)
 - Check Render logs for errors
 
 ### Model Not Found Error
+
 - Make sure `app/model.joblib` is committed to git:
   ```bash
   git add app/model.joblib
@@ -143,6 +156,7 @@ Consider upgrading to Render's **Starter plan** ($7/month)
 If Render doesn't work for you:
 
 ### Railway.app
+
 ```bash
 railway login
 railway init
@@ -150,6 +164,7 @@ railway up
 ```
 
 ### Fly.io
+
 ```bash
 fly auth login
 fly launch
@@ -157,6 +172,7 @@ fly deploy
 ```
 
 ### Heroku
+
 ```bash
 heroku login
 heroku create mem-shirt-predictor
