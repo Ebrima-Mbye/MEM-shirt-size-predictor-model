@@ -57,6 +57,7 @@ def read_root() -> Dict[str, str]:
 
 
 @app.get("/health")
+@app.head("/health")
 def health() -> Dict[str, Any]:
     return {
         "status": "ok",
